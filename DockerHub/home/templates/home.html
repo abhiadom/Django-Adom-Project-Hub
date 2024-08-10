@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Welcome to Docker Hub!</h1>
+{% if user.is_authenticated %}
+<h2>You have been authenticated!</h2>
+<!--Take in input like RP2040 vs. ESP32, Name of Container, Port to be bound to-->
+{% else %}
+<h2>You are NOT LOGGED IN! Please Log in.</h2>
+{% endif %}
+
+{% endblock %}

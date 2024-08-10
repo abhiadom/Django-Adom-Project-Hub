@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<script>
+    function toggleForm() {
+        const formDiv = document.getElementById('projectForm');
+        const createButton = document.getElementById('createButton');
+        if (formDiv && createButton) {
+            formDiv.style.display = formDiv.style.display === 'none' ? 'block' : 'none';
+            createButton.style.display = createButton.style.display === 'none' ? 'block' : 'none';
+        } else {
+            console.error("Project form or create button element not found");
+        }
+    }
+
+    function showCreateButton() {
+        const createButton = document.getElementById('createButton');
+        const formDiv = document.getElementById('projectForm');
+        if (createButton && formDiv) {
+            createButton.style.display = 'block';
+            formDiv.style.display = 'none';
+        } else {
+            console.error("Create button or project form element not found");
+        }
+    }
+</script>
+<h1>All Projects: </h1>
+<hr>
+{% for project in projects %}
+<div style="margin-bottom: 10px;">
+    <a href="{% url 'project_display' project.id %}" style="padding: 10px 20px; background-color: #26619c; color: white; border: none; border-radius: 5px; cursor: pointer; text-decoration: none;">{{ project }}</a>
+    <br>
+    <br>
+    <ul>
+        <li><span><strong>Type:</strong> {{ project.type }} in <strong>{{ project.language }}</strong></span></li>
+        <li><span><strong>Port:</strong> {{ project.port }}</span></li>
+        <li><span><strong>ID:</strong> {{ project.id }}</span></li>
+    </ul>
+</div>
+<hr>
+{% endfor %}
+<button id="createButton" onclick="toggleForm()" style="padding: 10px 20px; background-color: #87ceeb; color: white; border: none; border-radius: 5px; cursor: pointer;">Create Project</button>
+<div id="projectForm" style="display: none; margin-top: 20px;" class="shadow p-4 mb-5 bg-body rounded">
+    <form method="post" onsubmit="showCreateButton()">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="padding: 10px 20px; background-color: #74b3ce; color: white; border: none; border-radius: 5px; cursor: pointer;">Save Project</button>
+    </form>
+</div>
+{% else %}
+<p style="color: red; font-weight: bold;">Please log in to view your projects.</p>
+{% endif %}
+{% endblock %}
