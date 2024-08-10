@@ -1,0 +1,25 @@
+{
+    "workbench.colorTheme": "Default Dark+",
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "workbench.startupEditor": "none",
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#333333",
+        "sideBar.background": "#282828",
+        "editor.background": "#1e1e1e"
+    },
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+            "path": "/bin/bash"
+        }
+    },
+    "window.zoomLevel": 1,
+    "terminal.integrated.shellArgs.linux": ["-c", "picocom /dev/ttyUSB0"],
+    "code-runner.terminalRoot": "/",
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.executorMap": {
+        "c": "if [ -d \"/workspace/RP2040_ProjectC/build\" ]; then rm -rf \"/workspace/RP2040_ProjectC/build\"; fi && cd /workspace/RP2040_ProjectC && mkdir build && cd build && cmake -G \"Unix Makefiles\" .. && make && cp /workspace/RP2040_ProjectC/build/*.uf2 /mnt/d_drive && test -d ",
+        "python": "cd /workspace/RP2040_ProjectPython && python3 -u",
+    }
+}              
+
+
